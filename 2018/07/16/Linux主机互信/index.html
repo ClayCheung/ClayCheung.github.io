@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://claycheung.github.io">
   <title>Linux主机互信 | 张凯伦的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 #配置思路：  主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码  #前提条件：• 安装了expect,如果没有yum install -y expect 安装•">
+  <meta name="description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 #配置思路：  主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux主机互信">
 <meta property="og:url" content="https://claycheung.github.io/2018/07/16/Linux主机互信/index.html">
 <meta property="og:site_name" content="张凯伦的博客">
-<meta property="og:description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 #配置思路：  主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码  #前提条件：• 安装了expect,如果没有yum install -y expect 安装•">
+<meta property="og:description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 #配置思路：  主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-16T04:59:35.300Z">
+<meta property="og:updated_time" content="2018-07-16T05:02:26.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux主机互信">
-<meta name="twitter:description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 #配置思路：  主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码  #前提条件：• 安装了expect,如果没有yum install -y expect 安装•">
+<meta name="twitter:description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 #配置思路：  主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
   
     <link rel="alternative" href="/atom.xml" title="张凯伦的博客" type="application/atom+xml">
   
@@ -180,11 +180,8 @@
 <ol>
 <li>主机A，生成私钥、公钥</li>
 <li>将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上</li>
-<li>传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码</li>
-</ol>
-<p>#前提条件：<br>• 安装了expect,如果没有yum install -y expect 安装<br>• 保证网络连通性<br>• 手工输密码可以SSH登录</p>
-<p>#配置步骤：</p>
-<ol>
+<li>传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码<a id="more"></a>
+#前提条件：<br>• 安装了expect,如果没有yum install -y expect 安装<br>• 保证网络连通性<br>• 手工输密码可以SSH登录<br>#配置步骤：</li>
 <li>在主机A上，生成私钥、公钥。强制指定加密算法为RSA。<blockquote>
 <p>ssh-keygen -t rsa</p>
 </blockquote>

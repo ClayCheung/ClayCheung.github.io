@@ -181,57 +181,10 @@
 <ol>
 <li>主机A，生成私钥、公钥</li>
 <li>将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上</li>
-<li>传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码</li>
-</ol>
-<p>#前提条件：<br>• 安装了expect,如果没有yum install -y expect 安装<br>• 保证网络连通性<br>• 手工输密码可以SSH登录</p>
-<p>#配置步骤：</p>
-<ol>
-<li>在主机A上，生成私钥、公钥。强制指定加密算法为RSA。<blockquote>
-<p>ssh-keygen -t rsa</p>
-</blockquote>
-</li>
-<li>观察是否成功生成公钥、私钥。<blockquote>
-<p>ls ~/.ssh/<br>id_rsa    id_rsa.pub</p>
-</blockquote>
-</li>
-<li>编写shell脚本id_copy.sh</li>
-</ol>
-<pre><code>
-#!/bin/bash
-#把list.txt每行中的第1列赋值给IP，第2列赋值给PASSWD
-cat /tmp/list.txt | while read IP PASSWD
-do
-{
-#带参执行expect脚本
-expect /tmp/id_copy.expect $IP $PASSWD
-#输出绿色的提示消息到文件
-echo -e "\033[32m $IP is done.\033[0m" >> /tmp/idcopy.log
-#后台运行循环中的每一步，使expect中的操作可以并行执行
-}&
-done
-</code></pre>
-
-<ol start="4">
-<li>编写expect脚本id_copy.expect</li>
-</ol>
-<pre><code>#!/bin/expect
-set ip [lindex $argv 0]
-set passwd [lindex $argv 1]
-#ssh等待超时时间15秒，根据网络情况自行设定
-set timeout 15
-#开启一个会话，传送公钥至指定主机，等到(yes/no)?出现就输入yes,等到assword出现就输入密码
-spawn ssh-copy-id -i /root/.ssh/id_rsa.pub root@$ip
-expect {
-&quot;*(yes/no)?&quot; {send &quot;yes\r&quot;;exp_continue}
-&quot;*assword:&quot; {send &quot;$passwd\r&quot;}
-}
-expect eof;
-</code></pre><p>#验证</p>
-<ul>
-<li>ssh list.txt列表中的主机，测试是否能免密登录</li>
-<li>cat ~/.ssh/known_hosts,观察是否认知到所有其他主机</li>
-</ul>
-
+<li>传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码
+        
+          <a class="article-more-a" href="/2018/07/16/Linux主机互信/#more">more >></a>
+        
       
 
       
