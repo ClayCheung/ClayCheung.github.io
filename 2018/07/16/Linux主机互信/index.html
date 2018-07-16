@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://claycheung.github.io">
   <title>Linux主机互信 | 张凯伦的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 #配置思路：  主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
-<meta name="keywords" content="Linux">
+  <meta name="description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 配置思路： 主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux主机互信">
 <meta property="og:url" content="https://claycheung.github.io/2018/07/16/Linux主机互信/index.html">
 <meta property="og:site_name" content="张凯伦的博客">
-<meta property="og:description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 #配置思路：  主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
+<meta property="og:description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 配置思路： 主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-16T05:02:26.806Z">
+<meta property="og:updated_time" content="2018-07-16T05:53:37.717Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux主机互信">
-<meta name="twitter:description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 #配置思路：  主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
+<meta name="twitter:description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 配置思路： 主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
   
     <link rel="alternative" href="/atom.xml" title="张凯伦的博客" type="application/atom+xml">
   
@@ -176,24 +176,25 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h1><p>一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。</p>
-<p>#配置思路：</p>
-<ol>
+<h1 id="配置思路："><a href="#配置思路：" class="headerlink" title="配置思路："></a>配置思路：</h1><ol>
 <li>主机A，生成私钥、公钥</li>
 <li>将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上</li>
-<li>传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码<a id="more"></a>
-#前提条件：<br>• 安装了expect,如果没有yum install -y expect 安装<br>• 保证网络连通性<br>• 手工输密码可以SSH登录<br>#配置步骤：</li>
-<li>在主机A上，生成私钥、公钥。强制指定加密算法为RSA。<blockquote>
+<li>传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码<br><br><a id="more"></a><h1 id="前提条件："><a href="#前提条件：" class="headerlink" title="前提条件："></a>前提条件：</h1>• 安装了expect,如果没有yum install -y expect 安装<br>• 保证网络连通性<br>• 手工输密码可以SSH登录</li>
+</ol>
+<hr>
+<h1 id="配置步骤："><a href="#配置步骤：" class="headerlink" title="配置步骤："></a>配置步骤：</h1><p style="font-size: 16px">1. 在主机A上，生成私钥、公钥。强制指定加密算法为RSA。</p>
+
+<blockquote>
 <p>ssh-keygen -t rsa</p>
 </blockquote>
-</li>
-<li>观察是否成功生成公钥、私钥。<blockquote>
+<p style="font-size: 16px">2. 观察是否成功生成公钥、私钥。</p>
+
+<blockquote>
 <p>ls ~/.ssh/<br>id_rsa    id_rsa.pub</p>
 </blockquote>
-</li>
-<li>编写shell脚本id_copy.sh</li>
-</ol>
-<pre><code>
-#!/bin/bash
+<p style="font-size: 16px">3. 编写shell脚本id_copy.sh</p>
+
+<pre><code>#!/bin/bash
 #把list.txt每行中的第1列赋值给IP，第2列赋值给PASSWD
 cat /tmp/list.txt | while read IP PASSWD
 do
@@ -207,9 +208,9 @@ echo -e "\033[32m $IP is done.\033[0m" >> /tmp/idcopy.log
 done
 </code></pre>
 
-<ol start="4">
-<li>编写expect脚本id_copy.expect</li>
-</ol>
+<p style="font-size: 16px">4. 编写expect脚本id_copy.expect</p>
+
+
 <pre><code>#!/bin/expect
 set ip [lindex $argv 0]
 set passwd [lindex $argv 1]
@@ -222,8 +223,7 @@ expect {
 &quot;*assword:&quot; {send &quot;$passwd\r&quot;}
 }
 expect eof;
-</code></pre><p>#验证</p>
-<ul>
+</code></pre><h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><ul>
 <li>ssh list.txt列表中的主机，测试是否能免密登录</li>
 <li>cat ~/.ssh/known_hosts,观察是否认知到所有其他主机</li>
 </ul>
@@ -261,7 +261,7 @@ expect eof;
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
         		</li>
       		
 		</ul>
@@ -360,7 +360,7 @@ expect eof;
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#需求："><span class="toc-number">1.</span> <span class="toc-text">需求：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#需求："><span class="toc-number">1.</span> <span class="toc-text">需求：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置思路："><span class="toc-number">2.</span> <span class="toc-text">配置思路：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前提条件："><span class="toc-number">3.</span> <span class="toc-text">前提条件：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置步骤："><span class="toc-number">4.</span> <span class="toc-text">配置步骤：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#验证"><span class="toc-number">5.</span> <span class="toc-text">验证</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -494,11 +494,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">test</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">test</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
             
             <div class="clearfix"></div>
