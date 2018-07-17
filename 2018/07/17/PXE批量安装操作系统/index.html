@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://claycheung.github.io">
-  <title>Archives | 张凯伦的博客</title>
+  <title>解决redhat不注册不能使用yum问题 | 张凯伦的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="描述信息">
-<meta name="keywords" content="openstack">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张凯伦的博客">
-<meta property="og:url" content="https://claycheung.github.io/archives/index.html">
+  <meta name="description" content="解决redhat不注册不能使用yum问题 	 	ha{ 		font-size: 30px; 		text-align: center; 		font-family: Microsoft YaHei; 	} 	pa{ 		font-size: 20px; 		color:#630; 	} 	pb{ 		font-size: 20px; 		color: black; 	} 	tips{">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决redhat不注册不能使用yum问题">
+<meta property="og:url" content="https://claycheung.github.io/2018/07/17/PXE批量安装操作系统/index.html">
 <meta property="og:site_name" content="张凯伦的博客">
-<meta property="og:description" content="描述信息">
+<meta property="og:description" content="解决redhat不注册不能使用yum问题 	 	ha{ 		font-size: 30px; 		text-align: center; 		font-family: Microsoft YaHei; 	} 	pa{ 		font-size: 20px; 		color:#630; 	} 	pb{ 		font-size: 20px; 		color: black; 	} 	tips{">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-17T06:25:18.892Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张凯伦的博客">
-<meta name="twitter:description" content="描述信息">
+<meta name="twitter:title" content="解决redhat不注册不能使用yum问题">
+<meta name="twitter:description" content="解决redhat不注册不能使用yum问题 	 	ha{ 		font-size: 30px; 		text-align: center; 		font-family: Microsoft YaHei; 	} 	pa{ 		font-size: 20px; 		color:#630; 	} 	pb{ 		font-size: 20px; 		color: black; 	} 	tips{">
   
     <link rel="alternative" href="/atom.xml" title="张凯伦的博客" type="application/atom+xml">
   
@@ -154,36 +155,152 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-PXE批量安装操作系统" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      解决redhat不注册不能使用yum问题
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/17/PXE批量安装操作系统/" class="archive-article-date">
+
+        
+        <a href="/2018/07/17/PXE批量安装操作系统/" class="archive-article-date">
   	<time datetime="2018-07-17T02:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/17/PXE批量安装操作系统/">解决redhat不注册不能使用yum问题</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>解决redhat不注册不能使用yum问题</title>
+	<style type="text/css">
+	ha{
+		font-size: 30px;
+		text-align: center;
+		font-family: Microsoft YaHei;
+	}
+	pa{
+		font-size: 20px;
+		color:#630;
+	}
+	pb{
+		font-size: 20px;
+		color: black;
+	}
+	tips{
+		font-size: 20px;
+		background-color: #C1EDF4;
+		color: #F1AB13;
+	}
 
-        <div class="article-info info-on-right">
-          
+	</style>
+</head>
+<body>
+	<ha>诉求：</ha>
+		<br>
+	<pa>&nbsp;&nbsp;<li>redhat 6.8 安装图形化界面后不注册不能免费使用yum</li>
+	</pa>
+		<br><br>
+	<ha>解决方案：</ha>
+		<br>
+	<pa>&nbsp;&nbsp;<li>通过从centOS的软件包中rpm yum，再建立centos yum仓库解决。</li>
+	</pa><a id="more"></a>
+		<br><br>
+	<ha>实施步骤：</ha>
+		<br>
+	<pa>
+		1.检查是否安装yum包。查看RHEL是否安装了yum，若是安装了，那么又有哪些yum包：
+    <pre><code>rpm -qa |grep yum</code></pre> 
+   		 <br>
+		2. 删除redhat自带的yum包
+    <pre><code>rpm -qa|grep yum|xargs rpm -e --nodeps    #不检查依赖，直接删除rpm包</code></pre> 
+	</pa>
+	<br>
+	<pa>3.下载新的yum包。使用Centos6.8的yum包<br>
+&nbsp;&nbsp; <li>官网找4个包</li>
+<pre><code>wget  http://vault.centos.org/centos/6.8/os/x86_64/Packages/yum-3.2.29-73.el6.centos.noarch.rpm
+wget  http://vault.centos.org/centos/6.8/os/x86_64/Packages/yum-metadata-parser-1.1.2-16.el6.x86_64.rpm
+wget  http://vault.centos.org/centos/6.8/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.30-37.el6.noarch.rpm
+</code></pre> 
+
+
+4.rpm 安装 yum<br>
+<blockquote style="font-size: 14px">
+tips:直接RPM会报错，无法安装yum：
+warning: rpmts_HdrFromFdno: Header V3 DSA signature: NOKEY, key ID***** <br>
+由于yum安装了旧版本的GPG keys造成的，解决办法就是:去依赖，强制安装<br>
+后面加上参数 --force --nodeps
+</blockquote><br>
+
+<pre><code>rpm -ivh python-urlgrabber-3.9.1-11.el6.noarch.rpm --force --nodeps
+rpm -ivh yum-3.2.29-73.el6.centos.noarch.rpm \
+yum-metadata-parser-1.1.2-16.el6.x86_64.rpm \
+yum-plugin-fastestmirror-1.1.30-37.el6.noarch.rpm --force --nodeps
+</code></pre> 
+5.导入centos yum仓库
+<pre><code>cd /etc/yum.repos.d/
+wget  http://mirrors.163.com/.help/CentOS6-Base-163.repo
+vim CentOS6-Base-163.repo
+</code></pre> 
+<li>编辑文件，把文件里面的$releasever全部替换为版本号：6</li>
+<pre><code>：%s/$releasever/6/g</code></pre> 
+    
+6.清除原有缓存，重建缓存</pa>
+<pre><code>yum clean all
+yum makecache
+</code></pre> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>心意我领了<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -195,98 +312,141 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="https://img.fanhaobai.com/qrcode.php?url=https://claycheung.github.io/2018/07/17/PXE批量安装操作系统/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/16/Linux主机互信/" class="archive-article-date">
-  	<time datetime="2018-07-16T02:34:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-16</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/16/Linux主机互信/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux主机互信</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/16/Linux主机互信/">Linux主机互信</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/13/张凯伦测试文章/" class="archive-article-date">
-  	<time datetime="2018-07-13T02:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/13/张凯伦测试文章/">张凯伦测试文章</a>
-    </h1>
-  
+        
+    </div>
+</aside>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">test</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
+  
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zODA0My8xNDU3Mw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
     
 
+  
+  
+  
 
+  
 
+  
+
+  
 
 
           </div>
@@ -309,8 +469,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
