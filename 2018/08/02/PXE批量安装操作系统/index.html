@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张凯伦的博客">
 <meta property="og:description" content="PXE批量安装操作系统需求： 数十乃至上百台服务器需要安装相同的操作系统 通PXE网络批量安装操作系统思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络 制作首节点:  以首节点为DHCP Server给PXE网口下发IP地址   以首节点为TFTP Server给其他服务器传pxelinux.0等boot loader程序   首节点作为镜像的http源，其他服务器通过http从">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-02T04:58:28.204Z">
+<meta property="og:updated_time" content="2018-08-02T05:01:31.943Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PXE批量安装操作系统">
 <meta name="twitter:description" content="PXE批量安装操作系统需求： 数十乃至上百台服务器需要安装相同的操作系统 通PXE网络批量安装操作系统思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络 制作首节点:  以首节点为DHCP Server给PXE网口下发IP地址   以首节点为TFTP Server给其他服务器传pxelinux.0等boot loader程序   首节点作为镜像的http源，其他服务器通过http从">
@@ -191,14 +191,16 @@
 <ul>
 <li>以首节点为DHCP Server给PXE网口下发IP地址  </li>
 <li>以首节点为TFTP Server给其他服务器传pxelinux.0等boot loader程序  </li>
-<li>首节点作为镜像的http源，其他服务器通过http从首节点获取镜像<br><br><a id="more"></a><br>&nbsp;&nbsp;&nbsp;&nbsp;4. 制作kickstart,可自己编写，也可以通过system-config-kickstart生成<br>&nbsp;&nbsp;&nbsp;&nbsp;5. 首节点开启tftp http dhcp服务，批量自动安装</li>
+<li>首节点作为镜像的http源，其他服务器通过http从首节点获取镜像  </li>
 </ul>
-</blockquote>
-<h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><h3 id="0-搭建PXE平面网络"><a href="#0-搭建PXE平面网络" class="headerlink" title="0. 搭建PXE平面网络"></a>0. 搭建PXE平面网络</h3>0.1 登录其中一台服务器硬件管理界面，确定哪个网口默认开启PXE功能<br>0.2 pxe网口需要在同一个二层vlan下<blockquote>
-<p>tips:==确保该二层vlan下没有其他服务器==，否则其他服务器可能会受影响重装系统</p>
 </blockquote>
 </li>
 </ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;4. 制作kickstart,可自己编写，也可以通过system-config-kickstart生成<br>&nbsp;&nbsp;&nbsp;&nbsp;5. 首节点开启tftp http dhcp服务，批量自动安装<br><br><a id="more"></a></p>
+<h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><h3 id="0-搭建PXE平面网络"><a href="#0-搭建PXE平面网络" class="headerlink" title="0. 搭建PXE平面网络"></a>0. 搭建PXE平面网络</h3><p>0.1 登录其中一台服务器硬件管理界面，确定哪个网口默认开启PXE功能<br>0.2 pxe网口需要在同一个二层vlan下</p>
+<blockquote>
+<p>tips:==确保该二层vlan下没有其他服务器==，否则其他服务器可能会受影响重装系统</p>
+</blockquote>
 <h3 id="1-安装首节点-："><a href="#1-安装首节点-：" class="headerlink" title="1. 安装首节点 ："></a>1. 安装首节点 ：</h3><blockquote>
 <p>笔记本上的虚拟机作为首节点 </p>
 </blockquote>
