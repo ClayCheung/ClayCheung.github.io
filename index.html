@@ -163,12 +163,100 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/17/PXE批量安装操作系统/">解决redhat不注册不能使用yum问题</a>
+      <a class="article-title" href="/2018/08/02/PXE批量安装操作系统/">PXE批量安装操作系统</a>
     </h1>
   
 
         
-        <a href="/2018/07/17/PXE批量安装操作系统/" class="archive-article-date">
+        <a href="/2018/08/02/PXE批量安装操作系统/" class="archive-article-date">
+  	<time datetime="2018-08-02T04:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-02</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PXE批量安装操作系统"><a href="#PXE批量安装操作系统" class="headerlink" title="PXE批量安装操作系统"></a>PXE批量安装操作系统</h1><h2 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h2><ul>
+<li>数十乃至上百台服务器需要安装相同的操作系统</li>
+<li>通PXE网络批量安装操作系统<h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2></li>
+</ul>
+<ol>
+<li>确定服务器默认开启pxe功能的网口</li>
+<li>搭建PXE平面网络</li>
+<li>制作首节点:<blockquote>
+<ul>
+<li>以首节点为DHCP Server给PXE网口下发IP地址  </li>
+<li>以首节点为TFTP Server给其他服务器传pxelinux.0等boot loader程序  </li>
+<li>首节点作为镜像的http源，其他服务器通过http从首节点获取镜像<br><br>
+        
+          <a class="article-more-a" href="/2018/08/02/PXE批量安装操作系统/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/02/PXE批量安装操作系统/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-解决redhat不注册不能使用yum问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/17/解决redhat不注册不能使用yum问题/">解决redhat不注册不能使用yum问题</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/17/解决redhat不注册不能使用yum问题/" class="archive-article-date">
   	<time datetime="2018-07-17T02:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-17</time>
 </a>
         
@@ -215,7 +303,7 @@
 	<pa>&nbsp;&nbsp;<li>通过从centOS的软件包中rpm yum，再建立centos yum仓库解决。</li>
 	</pa>
         
-          <a class="article-more-a" href="/2018/07/17/PXE批量安装操作系统/#more">more >></a>
+          <a class="article-more-a" href="/2018/07/17/解决redhat不注册不能使用yum问题/#more">more >></a>
         
       
 
@@ -239,7 +327,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/17/PXE批量安装操作系统/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/07/17/解决redhat不注册不能使用yum问题/">展开全文 >></a>
         </p>
       
 
