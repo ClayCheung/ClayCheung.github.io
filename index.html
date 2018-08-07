@@ -270,43 +270,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>解决redhat不注册不能使用yum问题</title>
-	<style type="text/css">
-	ha{
-		font-size: 30px;
-		text-align: center;
-		font-family: Microsoft YaHei;
-	}
-	pa{
-		font-size: 20px;
-		color:#630;
-	}
-	pb{
-		font-size: 20px;
-		color: black;
-	}
-	tips{
-		font-size: 20px;
-		background-color: #C1EDF4;
-		color: #F1AB13;
-	}
-
-	</style>
-</head>
-<body>
-	<ha>诉求：</ha>
-		<br>
-	<pa>&nbsp;&nbsp;<li>redhat 6.8 安装图形化界面后不注册不能免费使用yum</li>
-	</pa>
-		<br><br>
-	<ha>解决方案：</ha>
-		<br>
-	<pa>&nbsp;&nbsp;<li>通过从centOS的软件包中rpm yum，再建立centos yum仓库解决。</li>
-	</pa>
+        <h1 id="解决redhat不注册不能使用yum问题"><a href="#解决redhat不注册不能使用yum问题" class="headerlink" title="解决redhat不注册不能使用yum问题"></a>解决redhat不注册不能使用yum问题</h1><h2 id="诉求："><a href="#诉求：" class="headerlink" title="诉求："></a>诉求：</h2><ul>
+<li>安装图形化界面后不注册不能免费使用yum<h2 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h2></li>
+</ul>
+<ul>
+<li>通过从centOS的软件包中rpm yum，再建立centos yum仓库解决。
         
           <a class="article-more-a" href="/2018/07/17/解决redhat不注册不能使用yum问题/#more">more >></a>
         
@@ -383,8 +351,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h1><p>一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。</p>
-<h1 id="配置思路："><a href="#配置思路：" class="headerlink" title="配置思路："></a>配置思路：</h1><ol>
+        <h1 id="Linux主机互信"><a href="#Linux主机互信" class="headerlink" title="Linux主机互信"></a>Linux主机互信</h1><h2 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h2><p>一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。</p>
+<h2 id="配置思路："><a href="#配置思路：" class="headerlink" title="配置思路："></a>配置思路：</h2><ol>
 <li>主机A，生成私钥、公钥</li>
 <li>将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上</li>
 <li>传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码<br><br>

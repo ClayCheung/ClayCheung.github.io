@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://claycheung.github.io">
   <title>Linux主机互信 | 张凯伦的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 配置思路： 主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
+  <meta name="description" content="Linux主机互信需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 配置思路： 主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux主机互信">
 <meta property="og:url" content="https://claycheung.github.io/2018/07/16/Linux主机互信/index.html">
 <meta property="og:site_name" content="张凯伦的博客">
-<meta property="og:description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 配置思路： 主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
+<meta property="og:description" content="Linux主机互信需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 配置思路： 主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-16T06:06:06.316Z">
+<meta property="og:updated_time" content="2018-08-07T08:55:14.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux主机互信">
-<meta name="twitter:description" content="需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 配置思路： 主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
+<meta name="twitter:description" content="Linux主机互信需求：一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。 配置思路： 主机A，生成私钥、公钥 将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上 传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码">
   
     <link rel="alternative" href="/atom.xml" title="张凯伦的博客" type="application/atom+xml">
   
@@ -180,14 +180,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h1><p>一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。</p>
-<h1 id="配置思路："><a href="#配置思路：" class="headerlink" title="配置思路："></a>配置思路：</h1><ol>
+        <h1 id="Linux主机互信"><a href="#Linux主机互信" class="headerlink" title="Linux主机互信"></a>Linux主机互信</h1><h2 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h2><p>一台linux主机A，能够免密访问（SSH、SCP等）其他所有的Linux主机。</p>
+<h2 id="配置思路："><a href="#配置思路：" class="headerlink" title="配置思路："></a>配置思路：</h2><ol>
 <li>主机A，生成私钥、公钥</li>
 <li>将主机A的公钥传送给其他所有主机的~/.ssh/authorized_keys文件上</li>
-<li>传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码<br><br><a id="more"></a><h1 id="前提条件："><a href="#前提条件：" class="headerlink" title="前提条件："></a>前提条件：</h1>• 安装了expect,如果没有yum install -y expect 安装<br>• 保证网络连通性<br>• 手工输密码可以SSH登录</li>
+<li>传送公钥时需要输入目的主机的用户名/密码，使用expect非交互形式批量导入用户名/密码<br><br><a id="more"></a><h2 id="前提条件："><a href="#前提条件：" class="headerlink" title="前提条件："></a>前提条件：</h2>• 安装了expect,如果没有yum install -y expect 安装<br>• 保证网络连通性<br>• 手工输密码可以SSH登录  </li>
 </ol>
 <hr>
-<h1 id="配置步骤："><a href="#配置步骤：" class="headerlink" title="配置步骤："></a>配置步骤：</h1><p style="font-size: 16px">1. 在主机A上，生成私钥、公钥。强制指定加密算法为RSA。</p>
+<h2 id="配置步骤："><a href="#配置步骤：" class="headerlink" title="配置步骤："></a>配置步骤：</h2><p style="font-size: 16px">1. 在主机A上，生成私钥、公钥。强制指定加密算法为RSA。</p>
 
 <blockquote>
 <p>ssh-keygen -t rsa</p>
@@ -228,7 +228,7 @@ expect {
 &quot;*assword:&quot; {send &quot;$passwd\r&quot;}
 }
 expect eof;
-</code></pre><h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><ul>
+</code></pre><h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><ul>
 <li>ssh list.txt列表中的主机，测试是否能免密登录</li>
 <li>cat ~/.ssh/known_hosts,观察是否认知到所有其他主机</li>
 </ul>
@@ -374,7 +374,7 @@ expect eof;
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#需求："><span class="toc-number">1.</span> <span class="toc-text">需求：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置思路："><span class="toc-number">2.</span> <span class="toc-text">配置思路：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前提条件："><span class="toc-number">3.</span> <span class="toc-text">前提条件：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置步骤："><span class="toc-number">4.</span> <span class="toc-text">配置步骤：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#验证"><span class="toc-number">5.</span> <span class="toc-text">验证</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux主机互信"><span class="toc-number">1.</span> <span class="toc-text">Linux主机互信</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#需求："><span class="toc-number">1.1.</span> <span class="toc-text">需求：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置思路："><span class="toc-number">1.2.</span> <span class="toc-text">配置思路：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前提条件："><span class="toc-number">1.3.</span> <span class="toc-text">前提条件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置步骤："><span class="toc-number">1.4.</span> <span class="toc-text">配置步骤：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证"><span class="toc-number">1.5.</span> <span class="toc-text">验证</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
