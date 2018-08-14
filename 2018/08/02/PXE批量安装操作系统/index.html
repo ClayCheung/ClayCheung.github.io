@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张凯伦的博客">
 <meta property="og:description" content="PXE批量安装操作系统需求： 数十乃至上百台服务器需要安装相同的操作系统 通PXE网络批量安装操作系统思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络 制作首节点:  以首节点为DHCP Server给PXE网口下发IP地址   以首节点为TFTP Server给其他服务器传pxelinux.0等boot loader程序   首节点作为镜像的http源，其他服务器通过http从">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-02T05:01:31.943Z">
+<meta property="og:updated_time" content="2018-08-14T08:30:31.149Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PXE批量安装操作系统">
 <meta name="twitter:description" content="PXE批量安装操作系统需求： 数十乃至上百台服务器需要安装相同的操作系统 通PXE网络批量安装操作系统思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络 制作首节点:  以首节点为DHCP Server给PXE网口下发IP地址   以首节点为TFTP Server给其他服务器传pxelinux.0等boot loader程序   首节点作为镜像的http源，其他服务器通过http从">
@@ -219,7 +219,7 @@
 <p>7.3 redhat 6.8 ks文件示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#platform=x86, AMD64, or Intel EM64T</span><br><span class="line">#version=DEVEL</span><br><span class="line"># Firewall configuration</span><br><span class="line">firewall --disabled</span><br><span class="line"># Install OS instead of upgrade</span><br><span class="line">install</span><br><span class="line"># Use network installation</span><br><span class="line">url --url=&quot;http://192.168.10.10/cdrom&quot;      #指定镜像源为首节点http源</span><br><span class="line"># Root password</span><br><span class="line">rootpw --plaintext Yourpasswd@123</span><br><span class="line"># System authorization information</span><br><span class="line">auth  --useshadow  --passalgo=sha512</span><br><span class="line"># Use graphical install </span><br><span class="line">graphical                   #此行可以改成text 变为文本安装，graphical为图形界面安装</span><br><span class="line">firstboot --disable</span><br><span class="line"># System keyboard</span><br><span class="line">keyboard us</span><br><span class="line"># System language</span><br><span class="line">lang en_US</span><br><span class="line"># SELinux configuration</span><br><span class="line">selinux --disabled</span><br><span class="line"># Installation logging level</span><br><span class="line">logging --level=info</span><br><span class="line"># Reboot after installation  </span><br><span class="line">poweroff                #此处可以选 reboot poweroff shutdown 三选一</span><br><span class="line"># System timezone</span><br><span class="line">timezone  Asia/Shanghai</span><br><span class="line"># Network information</span><br><span class="line"># 配置网卡em1 通过dhcp获取地址（安装OS之后的第二次DHCP，区别于安装OS之前的第一次DHCP）</span><br><span class="line">network  --bootproto=dhcp --device=em1 --onboot=on --noipv6    </span><br><span class="line"># System bootloader configuration</span><br><span class="line">bootloader --location=mbr</span><br><span class="line"># Clear the Master Boot Record</span><br><span class="line">zerombr</span><br><span class="line"># Partition clearing information</span><br><span class="line">clearpart --all initlabel</span><br><span class="line"># Disk partitioning information               #设置分区</span><br><span class="line">part swap --fstype=&quot;swap&quot; --size=64000</span><br><span class="line">part /home --fstype=&quot;ext4&quot; --size=700000</span><br><span class="line">part /var --fstype=&quot;ext4&quot; --size=200000</span><br><span class="line">part /boot --fstype=&quot;ext4&quot; --size=500</span><br><span class="line">part / --asprimary --fstype=&quot;ext4&quot; --grow --size=1</span><br><span class="line"></span><br><span class="line">%packages</span><br><span class="line">@base                       #设置需要安装的软件包</span><br><span class="line"></span><br><span class="line">%end</span><br></pre></td></tr></table></figure></p>
 <h3 id="8-启动tftp、http、dhcp服务"><a href="#8-启动tftp、http、dhcp服务" class="headerlink" title="8. 启动tftp、http、dhcp服务"></a>8. 启动tftp、http、dhcp服务</h3><p>8.1 启动tftp、http、dhcp服务,开始批量PXE安装  </p>
 <blockquote>
-<p>tips:==在没有配置好default文件、ks文件等参数已经配置文件之前，不要开启DHCP服务==<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service xinetd restart</span><br><span class="line">service httpd restart</span><br><span class="line">service dhcpd restart</span><br></pre></td></tr></table></figure></p>
+<p>tips:==在没有配置好default文件、ks文件等配置文件之前，不要开启DHCP服务==<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service xinetd restart</span><br><span class="line">service httpd restart</span><br><span class="line">service dhcpd restart</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 
       
@@ -324,6 +324,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/08/14/PXE批量安装ESXi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          PXE批量安装ESXi
+        
+      </div>
+    </a>
   
   
     <a href="/2018/07/17/解决redhat不注册不能使用yum问题/" id="article-nav-older" class="article-nav-link-wrap">
@@ -498,6 +507,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">VMware vSphere</a>
               </li>
              
               <li class="article-tag-list-item">

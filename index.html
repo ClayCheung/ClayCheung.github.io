@@ -156,6 +156,114 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-PXE批量安装ESXi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/14/PXE批量安装ESXi/">PXE批量安装ESXi</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/14/PXE批量安装ESXi/" class="archive-article-date">
+  	<time datetime="2018-08-14T08:24:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-14</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PXE批量安装ESXi"><a href="#PXE批量安装ESXi" class="headerlink" title="PXE批量安装ESXi"></a>PXE批量安装ESXi</h1><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>ESXi虚拟化环境批量安装  </li>
+<li>服务器型号是HPE-DL380 G9 (适用于各种服务器，但ESXi镜像需要是根据不同服务器的定制版本) <h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2></li>
+</ul>
+<ol>
+<li>确定服务器默认开启pxe功能的网口</li>
+<li>搭建PXE平面网络</li>
+<li><p>制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:</p>
+<blockquote>
+<ul>
+<li>DHCP服务：  <ul>
+<li>分发PXE网口的临时IP  </li>
+<li>下发启动程序pxelinux.0</li>
+</ul>
+</li>
+<li>HTTP服务  <ul>
+<li>分发kickstart文件  </li>
+</ul>
+</li>
+<li>TFTP服务  <ul>
+<li>作为ESXi的iso镜像源  </li>
+<li>分发PXE配置文件（01-mac_address）  </li>
+<li>分发boot.cfg文件等启动必需文件</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><br>
+        
+          <a class="article-more-a" href="/2018/08/14/PXE批量安装ESXi/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">VMware vSphere</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/14/PXE批量安装ESXi/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PXE批量安装操作系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -591,6 +699,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">VMware vSphere</a>
               </li>
              
               <li class="article-tag-list-item">

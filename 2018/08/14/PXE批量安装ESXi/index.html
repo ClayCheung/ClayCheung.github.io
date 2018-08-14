@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://claycheung.github.io">
-  <title>张凯伦的博客</title>
+  <title>PXE批量安装ESXi | 张凯伦的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="九宫格（二）demo 	 		#main{ 			width: 170px; 			height:170px; 			background: blue; 			margin: 0 auto; 		} 		#main div{ 			width: 50px; 			line-height: 50px; 			text-align:center; 			background: #AAA;">
-<meta name="keywords" content="openstack">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张凯伦的博客">
-<meta property="og:url" content="https://claycheung.github.io/assets/demo/jiugongge_demo2.html">
+  <meta name="description" content="PXE批量安装ESXi环境 ESXi虚拟化环境批量安装   服务器型号是HPE-DL380 G9 (适用于各种服务器，但ESXi镜像需要是根据不同服务器的定制版本) 思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络 制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:   DHCP服务：   分发PXE网口的临时IP   下发启动程序pxelinux.0   HT">
+<meta name="keywords" content="linux,VMware vSphere">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PXE批量安装ESXi">
+<meta property="og:url" content="https://claycheung.github.io/2018/08/14/PXE批量安装ESXi/index.html">
 <meta property="og:site_name" content="张凯伦的博客">
-<meta property="og:description" content="九宫格（二）demo 	 		#main{ 			width: 170px; 			height:170px; 			background: blue; 			margin: 0 auto; 		} 		#main div{ 			width: 50px; 			line-height: 50px; 			text-align:center; 			background: #AAA;">
+<meta property="og:description" content="PXE批量安装ESXi环境 ESXi虚拟化环境批量安装   服务器型号是HPE-DL380 G9 (适用于各种服务器，但ESXi镜像需要是根据不同服务器的定制版本) 思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络 制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:   DHCP服务：   分发PXE网口的临时IP   下发启动程序pxelinux.0   HT">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-07-28T18:51:08.000Z">
+<meta property="og:updated_time" content="2018-08-14T08:30:57.933Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张凯伦的博客">
-<meta name="twitter:description" content="九宫格（二）demo 	 		#main{ 			width: 170px; 			height:170px; 			background: blue; 			margin: 0 auto; 		} 		#main div{ 			width: 50px; 			line-height: 50px; 			text-align:center; 			background: #AAA;">
+<meta name="twitter:title" content="PXE批量安装ESXi">
+<meta name="twitter:description" content="PXE批量安装ESXi环境 ESXi虚拟化环境批量安装   服务器型号是HPE-DL380 G9 (适用于各种服务器，但ESXi镜像需要是根据不同服务器的定制版本) 思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络 制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:   DHCP服务：   分发PXE网口的临时IP   下发启动程序pxelinux.0   HT">
   
     <link rel="alternative" href="/atom.xml" title="张凯伦的博客" type="application/atom+xml">
   
@@ -155,57 +155,110 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-PXE批量安装ESXi" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PXE批量安装ESXi
+    </h1>
+  
+
+        
+        <a href="/2018/08/14/PXE批量安装ESXi/" class="archive-article-date">
+  	<time datetime="2018-08-14T08:24:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-14</time>
+</a>
+        
+        
+      <span class="archive-article-date">
+        阅读量 <span id="busuanzi_value_page_pv"></span>
+      </span>
+    
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!doctype html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>九宫格（二）demo</title>
-	<style>
-		#main{
-			width: 170px;
-			height:170px;
-			background: blue;
-			margin: 0 auto;
-		}
-		#main div{
-			width: 50px;
-			line-height: 50px;
-			text-align:center;
-			background: #AAA;
-			margin:5px 5px 0 0;
-		}
-		#main a{
-			width: 55px;
-			line-height: 55px;
-			float: left;
-			padding: 0 0 5px 5px;
-			margin: 0 -5px -5px 0;
-			text-decoration: none;
-		}
-		#main a:hover{
-			background: red;
-		}
-	</style>
-</head>
-<body>
-	<div id="main">
-		<a href=""><div>1</div></a>
-		<a href=""><div>2</div></a>
-		<a href=""><div>3</div></a>
-		<a href=""><div>4</div></a>
-		<a href=""><div>5</div></a>
-		<a href=""><div>6</div></a>
-		<a href=""><div>7</div></a>
-		<a href=""><div>8</div></a>
-		<a href=""><div>9</div></a>
-	</div>
-</body>
-</html>
+        <h1 id="PXE批量安装ESXi"><a href="#PXE批量安装ESXi" class="headerlink" title="PXE批量安装ESXi"></a>PXE批量安装ESXi</h1><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>ESXi虚拟化环境批量安装  </li>
+<li>服务器型号是HPE-DL380 G9 (适用于各种服务器，但ESXi镜像需要是根据不同服务器的定制版本) <h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2></li>
+</ul>
+<ol>
+<li>确定服务器默认开启pxe功能的网口</li>
+<li>搭建PXE平面网络</li>
+<li><p>制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:</p>
+<blockquote>
+<ul>
+<li>DHCP服务：  <ul>
+<li>分发PXE网口的临时IP  </li>
+<li>下发启动程序pxelinux.0</li>
+</ul>
+</li>
+<li>HTTP服务  <ul>
+<li>分发kickstart文件  </li>
+</ul>
+</li>
+<li>TFTP服务  <ul>
+<li>作为ESXi的iso镜像源  </li>
+<li>分发PXE配置文件（01-mac_address）  </li>
+<li>分发boot.cfg文件等启动必需文件</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><br><a id="more"></a></p>
+</li>
+</ol>
+<h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><h3 id="0-准备工作"><a href="#0-准备工作" class="headerlink" title="0. 准备工作"></a>0. 准备工作</h3><p>0.1 登录其中一台服务器硬件管理界面，确定哪个网口默认开启PXE功能<br>0.2 pxe网口需要在同一个二层vlan下，其他网口不要加入PXE网络（硬件管理口不能用于PXE安装OS）<br>0.3 获取PXE网口的MAC地址列表</p>
+<blockquote>
+<p>tips:==确保该二层vlan下没有其他服务器==，否则其他服务器可能会受影响重装系统</p>
+</blockquote>
+<h3 id="1-安装首节点-："><a href="#1-安装首节点-：" class="headerlink" title="1. 安装首节点 ："></a>1. 安装首节点 ：</h3><blockquote>
+<p>以笔记本上的虚拟机作为首节点  </p>
+</blockquote>
+<p>1.1 配置一个网卡为桥接模式<br>1.2 安装redhat 6.8<br>1.3 关闭防火墙和selinux  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop</span><br><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+<h3 id="2-安装必要的软件-："><a href="#2-安装必要的软件-：" class="headerlink" title="2. 安装必要的软件 ："></a>2. 安装必要的软件 ：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install httpd dhcp tftp-server syslinux</span><br></pre></td></tr></table></figure>
+<h3 id="3-配置DCHP服务"><a href="#3-配置DCHP服务" class="headerlink" title="3. 配置DCHP服务"></a>3. 配置DCHP服务</h3><blockquote>
+<ul>
+<li>通过DHCP服务向所有服务器分配临时的IP地址（实际IP地址在KS文件中静态指定）  </li>
+<li>向所有服务器下发启动程序: pxelinux.0  </li>
+</ul>
+</blockquote>
+<p>3.1 编辑dhcp配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/dhcp/dhcpd.conf </span><br><span class="line"></span><br><span class="line">allow booting;</span><br><span class="line">allow bootp;</span><br><span class="line">ddns-update-style interim;</span><br><span class="line">ignore client-updates;</span><br><span class="line">subnet 10.0.0.0 netmask 255.255.255.0 &#123;</span><br><span class="line">        option subnet-mask      255.255.255.0;              #netmask</span><br><span class="line">        option domain-name-servers  10.0.0.88;          #dns-server</span><br><span class="line">        range dynamic-bootp 10.0.0.101 10.0.0.200;  #ip_range</span><br><span class="line">        default-lease-time      30000;                      #租期</span><br><span class="line">        max-lease-time          60000;</span><br><span class="line">        next-server             10.0.0.88;                  #DHCP server 地址</span><br><span class="line">        filename                &quot;pxelinux.0&quot;;               #读取的启动程序</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-配置TFTP服务"><a href="#4-配置TFTP服务" class="headerlink" title="4. 配置TFTP服务"></a>4. 配置TFTP服务</h3><p>4.1 使能tftp服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/xinetd.d/tftp</span><br><span class="line">    disable = no</span><br></pre></td></tr></table></figure></p>
+<p>4.2 挂载ESXi镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/cdrom</span><br><span class="line">mount /dev/cdrom /mnt/cdrom/</span><br></pre></td></tr></table></figure></p>
+<p>4.3 拷贝ESXi镜像至tftpboot/目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp  /mnt/cdrom/* /var/lib/tftpboot/</span><br></pre></td></tr></table></figure></p>
+<p>4.4 从syslinux拷贝menu.c32（启动菜单文件）覆盖tftpboot/中镜像文件中的menu.c32<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/syslinux/menu.c32 /var/lib/tftpboot/</span><br></pre></td></tr></table></figure></p>
+<p>4.5 从syslinux拷贝pxelinux.0（启动程序）至tftpboot/中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/</span><br></pre></td></tr></table></figure></p>
+<p>4.6 PXE配置文件集合  </p>
+<blockquote>
+<p>a. 创建pxelinux.cfg文件夹，存放所有PXE配置文件（01-mac_address）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /var/lib/tftpboot/pxelinux.cfg/</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>b. 生成所有PXE配置文件（01-mac_address），并上传至pxelinux.cfg文件夹  </p>
+<ul>
+<li>tips:PXE配置文件名示例：01-00-0c-29-10-6b-b7，==必须以01开头（01代表以太网）、MAC必须小写==、以横杠连接。  </li>
+<li>PXE配置文件根据/var/lib/tftpboot/isolinux.cfg文件做一些必要的修改。  </li>
+<li>PXE配置文件示例：</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cat /var/lib/tftpboot/pxelinux.cfg/01-00-0c-29-10-6b-b7 </span><br><span class="line"></span><br><span class="line">DEFAULT menu.c32</span><br><span class="line">MENU TITLE ESXi-6.0.0-20160302001-standard Boot Menu</span><br><span class="line">NOHALT 1</span><br><span class="line">PROMPT 0</span><br><span class="line">TIMEOUT 50           #启动界面倒计时5秒后自动选择默认label</span><br><span class="line">LABEL install</span><br><span class="line">  KERNEL mboot.c32</span><br><span class="line">  APPEND -c boot.cfg ks=http://10.0.0.88/ksfile/ks_esxi_01.cfg     #设置KS文件源</span><br><span class="line">  MENU LABEL ESXi-6.0.0-20160302001-standard ^Installer         # label名，可根据需要更改</span><br><span class="line">LABEL hddboot           #从硬盘启动的label，建议保留</span><br><span class="line">  LOCALBOOT 0x80</span><br><span class="line">  MENU LABEL ^Boot from local disk</span><br></pre></td></tr></table></figure>
+<h3 id="4-配置KS文件"><a href="#4-配置KS文件" class="headerlink" title="4. 配置KS文件"></a>4. 配置KS文件</h3><p>4.1 创建ksfile文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /var/www/html/ksfile/</span><br></pre></td></tr></table></figure></p>
+<p>4.2 上传所有KS文件到ksfile文件夹</p>
+<blockquote>
+<ul>
+<li>tips:  ksfile文件夹的命名以及所有ks文件的命名==根据PXE配置文件中设定的KS源指定==  </li>
+<li>ks文件示例：</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">cat /var/www/html/ksfile/ks_esxi_01.cfg </span><br><span class="line"></span><br><span class="line"># Sample scripted installation file</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line"># Accept the VMware End User License Agreement</span><br><span class="line">vmaccepteula</span><br><span class="line"></span><br><span class="line"># Set the root password for the DCUI and Tech Support Mode</span><br><span class="line">rootpw YourRootPasswd@123</span><br><span class="line"></span><br><span class="line"># Install on the first local disk available on machine</span><br><span class="line">install --firstdisk --overwritevmfs</span><br><span class="line"></span><br><span class="line"># Set the network to DHCP on the first network adapter</span><br><span class="line">network --bootproto=static --ip=188.103.70.101 --netmask=255.255.255.0 --gateway=188.103.70.1 --nameserver=188.103.70.1 --hostname=ZJHZ-test-01 --device=vmnic0</span><br><span class="line">reboot</span><br><span class="line"># A sample post-install script</span><br><span class="line">%post --interpreter=python --ignorefailure=true</span><br><span class="line">import time</span><br><span class="line">stampFile = open(&apos;/finished.stamp&apos;, mode=&apos;w&apos;)</span><br><span class="line">stampFile.write( time.asctime() )</span><br><span class="line"></span><br><span class="line">%firstboot --interpreter=busybox</span><br><span class="line"># DNS names</span><br><span class="line">esxcli system hostname set --fqdn=ZJHZ-test-01</span><br><span class="line">esxcli network ip dns search add --domain=chinamobile.com</span><br><span class="line"># DNS server addresses</span><br><span class="line">esxcli network ip dns server add --server=188.103.70.1</span><br><span class="line">esxcli network ip dns server add --server=10.0.0.88</span><br><span class="line">esxcfg-vmknic --enable-ipv6 false</span><br><span class="line"># SSH and ESXi shell</span><br><span class="line">vim-cmd hostsvc/enable_ssh</span><br><span class="line">vim-cmd hostsvc/start_ssh</span><br><span class="line">vim-cmd hostsvc/enable_esx_shell</span><br><span class="line">vim-cmd hostsvc/start_esx_shell</span><br><span class="line"># vSwitch set</span><br><span class="line">esxcfg-vswitch -v 20 -p&quot;Management Network&quot; vSwitch0</span><br><span class="line">esxcfg-vswitch -v 20 -p &quot;VM Network&quot; vSwitch0 </span><br><span class="line">esxcfg-vswitch -L vmnic0 vSwitch0</span><br><span class="line">esxcfg-vswitch -L vmnic1 vSwitch0</span><br><span class="line">esxcfg-vswitch -a vSwitch1 </span><br><span class="line">esxcfg-vswitch -L vmnic2 vSwitch1</span><br><span class="line">esxcfg-vswitch -L vmnic3 vSwitch1</span><br><span class="line">esxcfg-vswitch -A &quot;Storage-PG&quot; vSwitch1</span><br><span class="line">esxcfg-vswitch -v 30 -p &quot;Storage-PG&quot; vSwitch1</span><br><span class="line">esxcfg-vswitch -A &quot;iSCSI-PG&quot; vSwitch1</span><br><span class="line">esxcfg-vswitch -v 40 -p &quot;iSCSI-PG&quot; vSwitch1</span><br><span class="line">esxcfg-vmknic -a &quot;iSCSI-Plane&quot; -i 172.16.14.91 -n 255.255.255.0</span><br><span class="line">esxcfg-vswitch -v 40 -p &quot;iSCSI-Plane&quot; vSwitch1</span><br><span class="line">esxcfg-vswitch -a vSwitch2</span><br><span class="line">esxcfg-vswitch -L vmnic4 vSwitch2</span><br><span class="line">esxcfg-vswitch -L vmnic5 vSwitch2</span><br><span class="line">esxcfg-vswitch -A &quot;iSCSI-Plane&quot; vSwitch2</span><br><span class="line">esxcfg-vmknic -a &quot;vMotion Network&quot; -i 192.168.32.193 -n 255.255.255.0</span><br><span class="line">esxcfg-vswitch -v 50 -p &quot;vMotion Network&quot; vSwitch2</span><br></pre></td></tr></table></figure>
+<h3 id="5-启动tftp、http、dhcp服务"><a href="#5-启动tftp、http、dhcp服务" class="headerlink" title="5. 启动tftp、http、dhcp服务"></a>5. 启动tftp、http、dhcp服务</h3><p>5.1 启动tftp、http、dhcp服务,开始批量PXE安装  </p>
+<blockquote>
+<p>tips:==在没有配置好PXE配置文件、ks文件等配置文件之前，不要开启DHCP服务==<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service xinetd restart</span><br><span class="line">service httpd restart</span><br><span class="line">service dhcpd restart</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
       
 
       
@@ -234,6 +287,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">VMware vSphere</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -284,7 +352,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="https://img.fanhaobai.com/qrcode.php?url=https://claycheung.github.io/assets/demo/jiugongge_demo2.html" alt="微信分享二维码">
+      <img src="https://img.fanhaobai.com/qrcode.php?url=https://claycheung.github.io/2018/08/14/PXE批量安装ESXi/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -296,6 +364,16 @@
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/02/PXE批量安装操作系统/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PXE批量安装操作系统</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -309,6 +387,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PXE批量安装ESXi"><span class="toc-number">1.</span> <span class="toc-text">PXE批量安装ESXi</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境"><span class="toc-number">1.1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思路："><span class="toc-number">1.2.</span> <span class="toc-text">思路：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤："><span class="toc-number">1.3.</span> <span class="toc-text">步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-准备工作"><span class="toc-number">1.3.1.</span> <span class="toc-text">0. 准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装首节点-："><span class="toc-number">1.3.2.</span> <span class="toc-text">1. 安装首节点 ：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-安装必要的软件-："><span class="toc-number">1.3.3.</span> <span class="toc-text">2. 安装必要的软件 ：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-配置DCHP服务"><span class="toc-number">1.3.4.</span> <span class="toc-text">3. 配置DCHP服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-配置TFTP服务"><span class="toc-number">1.3.5.</span> <span class="toc-text">4. 配置TFTP服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-配置KS文件"><span class="toc-number">1.3.6.</span> <span class="toc-text">4. 配置KS文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-启动tftp、http、dhcp服务"><span class="toc-number">1.3.7.</span> <span class="toc-text">5. 启动tftp、http、dhcp服务</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -377,7 +468,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
