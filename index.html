@@ -156,6 +156,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-使用PowerCLI批量部署VM" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/30/使用PowerCLI批量部署VM/">PXE批量安装ESXi</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/30/使用PowerCLI批量部署VM/" class="archive-article-date">
+  	<time datetime="2018-08-30T09:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-30</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、安装PowerCLI"><a href="#一、安装PowerCLI" class="headerlink" title="一、安装PowerCLI"></a>一、安装PowerCLI</h1><ul>
+<li>在WinServer2008环境中安装PowerCLI，使用administrator账号登录安装（避免多用户环境下一些权限问题）  <h4 id="需要安装："><a href="#需要安装：" class="headerlink" title="需要安装："></a>需要安装：</h4><blockquote>
+<ul>
+<li>net_framework 4.5以上  </li>
+<li>powershell 3.0以上  </li>
+<li>PowerCLI</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>==tips==：net_framework、powershell安装完成之后，重启计算机，再安装PowerCLI  </p>
+<h4 id="附安装包链接："><a href="#附安装包链接：" class="headerlink" title="附安装包链接："></a>附安装包链接：</h4><blockquote>
+<p><a href="https://pan.baidu.com/s/1w1gmpuBqcxceN4WTxfveGA" target="_blank" rel="noopener">https://pan.baidu.com/s/1w1gmpuBqcxceN4WTxfveGA</a> 密码：e9ig<br> <br>
+        
+          <a class="article-more-a" href="/2018/08/30/使用PowerCLI批量部署VM/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">VMware vSphere</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PowerCLI</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/30/使用PowerCLI批量部署VM/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PXE批量安装ESXi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -183,8 +276,8 @@
 </ul>
 <ol>
 <li>确定服务器默认开启pxe功能的网口</li>
-<li>搭建PXE平面网络</li>
-<li><p>制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:</p>
+<li>搭建PXE平面网络  </li>
+<li><p>制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:  </p>
 <blockquote>
 <ul>
 <li>DHCP服务：  <ul>
@@ -707,6 +800,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">test</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PowerCLI</a>
               </li>
             
             <div class="clearfix"></div>

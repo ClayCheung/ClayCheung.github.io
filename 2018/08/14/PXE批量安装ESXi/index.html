@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://claycheung.github.io">
   <title>PXE批量安装ESXi | 张凯伦的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="PXE批量安装ESXi环境 ESXi虚拟化环境批量安装   服务器型号是HPE-DL380 G9 (适用于各种服务器，但ESXi镜像需要是根据不同服务器的定制版本) 思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络 制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:   DHCP服务：   分发PXE网口的临时IP   下发启动程序pxelinux.0   HT">
+  <meta name="description" content="PXE批量安装ESXi环境 ESXi虚拟化环境批量安装   服务器型号是HPE-DL380 G9 (适用于各种服务器，但ESXi镜像需要是根据不同服务器的定制版本) 思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络   制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:     DHCP服务：   分发PXE网口的临时IP   下发启动程序pxelinux.0">
 <meta name="keywords" content="linux,VMware vSphere">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PXE批量安装ESXi">
 <meta property="og:url" content="https://claycheung.github.io/2018/08/14/PXE批量安装ESXi/index.html">
 <meta property="og:site_name" content="张凯伦的博客">
-<meta property="og:description" content="PXE批量安装ESXi环境 ESXi虚拟化环境批量安装   服务器型号是HPE-DL380 G9 (适用于各种服务器，但ESXi镜像需要是根据不同服务器的定制版本) 思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络 制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:   DHCP服务：   分发PXE网口的临时IP   下发启动程序pxelinux.0   HT">
+<meta property="og:description" content="PXE批量安装ESXi环境 ESXi虚拟化环境批量安装   服务器型号是HPE-DL380 G9 (适用于各种服务器，但ESXi镜像需要是根据不同服务器的定制版本) 思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络   制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:     DHCP服务：   分发PXE网口的临时IP   下发启动程序pxelinux.0">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-14T08:30:57.933Z">
+<meta property="og:updated_time" content="2018-08-14T08:53:09.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PXE批量安装ESXi">
-<meta name="twitter:description" content="PXE批量安装ESXi环境 ESXi虚拟化环境批量安装   服务器型号是HPE-DL380 G9 (适用于各种服务器，但ESXi镜像需要是根据不同服务器的定制版本) 思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络 制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:   DHCP服务：   分发PXE网口的临时IP   下发启动程序pxelinux.0   HT">
+<meta name="twitter:description" content="PXE批量安装ESXi环境 ESXi虚拟化环境批量安装   服务器型号是HPE-DL380 G9 (适用于各种服务器，但ESXi镜像需要是根据不同服务器的定制版本) 思路：   确定服务器默认开启pxe功能的网口 搭建PXE平面网络   制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:     DHCP服务：   分发PXE网口的临时IP   下发启动程序pxelinux.0">
   
     <link rel="alternative" href="/atom.xml" title="张凯伦的博客" type="application/atom+xml">
   
@@ -186,8 +186,8 @@
 </ul>
 <ol>
 <li>确定服务器默认开启pxe功能的网口</li>
-<li>搭建PXE平面网络</li>
-<li><p>制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:</p>
+<li>搭建PXE平面网络  </li>
+<li><p>制作首节点，在首节点上部署DHCP服务、TFTP服务、HTTP服务:  </p>
 <blockquote>
 <ul>
 <li>DHCP服务：  <ul>
@@ -365,6 +365,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/08/30/使用PowerCLI批量部署VM/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          PXE批量安装ESXi
+        
+      </div>
+    </a>
   
   
     <a href="/2018/08/02/PXE批量安装操作系统/" id="article-nav-older" class="article-nav-link-wrap">
@@ -547,6 +556,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">test</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PowerCLI</a>
               </li>
             
             <div class="clearfix"></div>
