@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://github.com/ClayCheung/backupBlog/blob/master/photos/02.png">
 <meta property="og:image" content="https://github.com/ClayCheung/backupBlog/blob/master/photos/03.png">
 <meta property="og:image" content="https://github.com/ClayCheung/backupBlog/blob/master/photos/04.png">
-<meta property="og:updated_time" content="2018-08-30T11:07:35.907Z">
+<meta property="og:updated_time" content="2018-08-30T11:49:27.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用PowerCLI批量部署VM">
 <meta name="twitter:description" content="一、安装PowerCLI 在WinServer2008环境中安装PowerCLI，使用administrator账号登录安装（避免多用户环境下一些权限问题）  需要安装：  net_framework 4.5以上   powershell 3.0以上   PowerCLI     ==tips==：net_framework、powershell安装完成之后，重启计算机，再安装PowerCLI">
@@ -197,8 +197,9 @@
 </ul>
 <p>==tips==：net_framework、powershell安装完成之后，重启计算机，再安装PowerCLI  </p>
 <h4 id="附安装包链接："><a href="#附安装包链接：" class="headerlink" title="附安装包链接："></a>附安装包链接：</h4><blockquote>
-<p><a href="https://pan.baidu.com/s/1w1gmpuBqcxceN4WTxfveGA" target="_blank" rel="noopener">https://pan.baidu.com/s/1w1gmpuBqcxceN4WTxfveGA</a> 密码：e9ig<br> <br><a id="more"></a></p>
+<p><a href="https://pan.baidu.com/s/1w1gmpuBqcxceN4WTxfveGA" target="_blank" rel="noopener">https://pan.baidu.com/s/1w1gmpuBqcxceN4WTxfveGA</a> 密码：e9ig  </p>
 </blockquote>
+<p> <br><a id="more"></a></p>
 <h1 id="二、设置权限"><a href="#二、设置权限" class="headerlink" title="二、设置权限"></a>二、设置权限</h1><h4 id="1-管理员权限打开PowerCLI"><a href="#1-管理员权限打开PowerCLI" class="headerlink" title="1. 管理员权限打开PowerCLI"></a>1. 管理员权限打开PowerCLI</h4><h4 id="2-重新设置权限："><a href="#2-重新设置权限：" class="headerlink" title="2. 重新设置权限："></a>2. 重新设置权限：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set-executionPolicy RemoteSigned</span><br></pre></td></tr></table></figure>
 <h4 id="3-查看当前权限："><a href="#3-查看当前权限：" class="headerlink" title="3. 查看当前权限："></a>3. 查看当前权限：</h4>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get-executionPolicy     #看到权限是RemoteSigned即可</span><br></pre></td></tr></table></figure>
 <h4 id="4-关闭PowerCLI窗口，重新打开，就有权限执行操作了"><a href="#4-关闭PowerCLI窗口，重新打开，就有权限执行操作了" class="headerlink" title="4. 关闭PowerCLI窗口，重新打开，就有权限执行操作了"></a>4. 关闭PowerCLI窗口，重新打开，就有权限执行操作了</h4><p><img src="https://github.com/ClayCheung/backupBlog/blob/master/photos/clipboard.png" alt="01"></p>
@@ -239,7 +240,8 @@
 <blockquote>
 <p>move-vm  </p>
 </blockquote>
-<p>命令参考：<br><a href="http://pubs.vmware.com/vsphere-6-0/index.jsp?topic=%2Fcom.vmware.powercli.cmdletref.doc%2FOverview.html" target="_blank" rel="noopener">vSphere PowerCLI Cmds</a></p>
+<p>命令参考：<br><a href="http://pubs.vmware.com/vsphere-6-0/index.jsp?topic=%2Fcom.vmware.powercli.cmdletref.doc%2FOverview.html" target="_blank" rel="noopener">vSphere PowerCLI Cmds</a>  </p>
+<p>图片不可见，可查看有道笔记的分享：<br><a href="http://note.youdao.com/noteshare?id=9e8a77b8a1e0b1b23cbb221179a2a858&amp;sub=7D75E5A9B02F477395A7BF32C844EE03" target="_blank" rel="noopener">–&gt;点此进入有道笔记的分享</a></p>
 
       
 
